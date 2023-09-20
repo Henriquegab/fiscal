@@ -1,0 +1,26 @@
+﻿@model List<Fiscalio.Models.NotaFiscalViewModel> // Use dynamic para representar o resultado anônimo
+
+<h1>Lista de Notas Fiscais</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Emissor</th>
+            <th>Data</th>
+            <th>Valor Total</th> <!-- Adicione outras colunas conforme necessário -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var NotaFiscal in Model)
+        {
+            <tr>
+                <td>@NotaFiscal.NotaFiscal.IdNota</td>
+                <td>@NotaFiscal.NotaFiscal.Emissor</td>
+                <td>@NotaFiscal.NotaFiscal.Data</td>
+                <td>@NotaFiscal.ValorTotal</td>
+                <!-- Adicione outras colunas conforme necessário -->
+            </tr>
+        }
+    </tbody>
+</table>

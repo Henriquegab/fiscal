@@ -48,6 +48,11 @@ namespace Fiscalio.Persistence
 
                 e.Property(de => de.Emissor).HasMaxLength(150).HasColumnType("text");
 
+                e.HasMany(nf => nf.Itens)
+                .WithOne()
+                .HasForeignKey(item => item.IdNota)
+                .IsRequired(false);
+
 
 
             });
@@ -56,7 +61,7 @@ namespace Fiscalio.Persistence
             {
                 e.HasKey(de => de.IdItem);
 
-                e.HasOne<NotaFiscal>().WithMany().HasForeignKey(de => de.IdNota);
+                // e.HasOne<NotaFiscal>().WithMany().HasForeignKey(de => de.IdNota);
 
 
             });

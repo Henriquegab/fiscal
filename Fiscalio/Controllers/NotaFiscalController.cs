@@ -10,13 +10,23 @@ namespace Fiscalio.Controllers
     {
         private readonly AppDbContext _context;
 
-        public void NotaFiscaisController(AppDbContext context)
+        public NotaFiscalController(AppDbContext context)
         {
             _context = context;
         }
+
+
         public IActionResult Index()
         {
-            return View();
+            var notaFiscais = _context.NotaFiscais.Include(nf => nf.Itens).ToList();
+
+            var notaFiscalComValorTotal = notaFiscais.Select(nf => new NotaFiscalViewModel
+            {
+                NotaFiscal = nf,
+                ValorTotal = nf.Itens.Sum(item => item.Valor)
+            }).ToList();
+
+            return View(notaFiscalComValorTotal);
         }
     }
 }

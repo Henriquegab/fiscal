@@ -64,10 +64,13 @@ namespace Fiscalio.Migrations
             modelBuilder.Entity("Fiscalio.Models.Item", b =>
                 {
                     b.HasOne("Fiscalio.Models.NotaFiscal", null)
-                        .WithMany()
-                        .HasForeignKey("IdNota")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Itens")
+                        .HasForeignKey("IdNota");
+                });
+
+            modelBuilder.Entity("Fiscalio.Models.NotaFiscal", b =>
+                {
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }
