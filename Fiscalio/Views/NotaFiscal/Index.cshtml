@@ -2,7 +2,9 @@
 
 <h1>Lista de Notas Fiscais</h1>
 
-<table class="table">
+<button action="@Url.Action("Cadastrar", "NotaFiscal")">Nova Nota Fiscal</button>
+<br />
+<table class="table" style="border: 2px solid #000; border-collapse: collapse;">
     <thead>
         <tr>
             <th>ID</th>
@@ -19,6 +21,9 @@
                 <td>@NotaFiscal.NotaFiscal.Emissor</td>
                 <td>@NotaFiscal.NotaFiscal.Data</td>
                 <td>@NotaFiscal.ValorTotal</td>
+                <td><a href="@Url.Action("Editar", "NotaFiscal", new { id = NotaFiscal.NotaFiscal.IdNota })">Editar</a></td>
+                <td><a href="@Url.Action("Deletar", "NotaFiscal", new { id = NotaFiscal.NotaFiscal.IdNota })">Excluir</a></td>
+
                 <!-- Adicione outras colunas conforme necessário -->
             </tr>
         }

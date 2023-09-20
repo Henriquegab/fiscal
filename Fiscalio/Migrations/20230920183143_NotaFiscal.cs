@@ -49,7 +49,8 @@ namespace Fiscalio.Migrations
                         name: "FK_Itens_NotaFiscais_IdNota",
                         column: x => x.IdNota,
                         principalTable: "NotaFiscais",
-                        principalColumn: "IdNota");
+                        principalColumn: "IdNota",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

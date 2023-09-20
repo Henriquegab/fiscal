@@ -65,7 +65,8 @@ namespace Fiscalio.Migrations
                 {
                     b.HasOne("Fiscalio.Models.NotaFiscal", null)
                         .WithMany("Itens")
-                        .HasForeignKey("IdNota");
+                        .HasForeignKey("IdNota")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Fiscalio.Models.NotaFiscal", b =>

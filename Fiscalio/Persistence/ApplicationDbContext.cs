@@ -51,7 +51,8 @@ namespace Fiscalio.Persistence
                 e.HasMany(nf => nf.Itens)
                 .WithOne()
                 .HasForeignKey(item => item.IdNota)
-                .IsRequired(false);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 

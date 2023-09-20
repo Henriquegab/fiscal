@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fiscalio.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230920180447_NotaFiscal")]
+    [Migration("20230920183143_NotaFiscal")]
     partial class NotaFiscal
     {
         /// <inheritdoc />
@@ -68,7 +68,8 @@ namespace Fiscalio.Migrations
                 {
                     b.HasOne("Fiscalio.Models.NotaFiscal", null)
                         .WithMany("Itens")
-                        .HasForeignKey("IdNota");
+                        .HasForeignKey("IdNota")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Fiscalio.Models.NotaFiscal", b =>
