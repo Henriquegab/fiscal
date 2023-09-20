@@ -1,6 +1,98 @@
-﻿namespace Fiscalio.Views.NotaFiscal
+﻿@model Fiscalio.Models.NotaFiscalViewModel
+
+<h1>Cadastrar Nova Nota Fiscal</h1>
+
+@using (Html.BeginForm("Store", "NotaFiscal", FormMethod.Post))
 {
-    public class Create
-    {
-    }
+    <div class="form-group">
+        <label for="Emissor">Emissor:</label>
+        <input type="text" id="Emissor" name="Emissor" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Data">Data:</label>
+        <input type="date" id="Data" name="Data" class="form-control" required>
+    </div>
+
+    <h2>Itens da Nota Fiscal</h2>
+
+    <div id="itens-container">
+        
+    </div>
+
+    <button type="button" id="btnAdicionarItem">Adicionar novo item</button>
+
+    <table class="table table-itens">
+        <thead>
+            <th>Item</th>
+            <th>Produto</th>
+            <th>Valor</th>
+            <th>[Editar]</th>
+            <th>[Excluir]</th>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><input type="text" name="Itens[1].Item" /></td>
+                <td><input type="text" name="Itens[1].Produto" /></td>
+                <td><input type="number" name="Itens[1].Valor" /></td>
+                <td><button type="button" class="btnEditarItem">Editar</button></td>
+                <td><button type="button" class="btnExcluirItem" data-row="1">Excluir</button></td>
+            </tr>
+
+            
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+}
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var proximoIndice = 2; 
+
+            
+            $("#btnAdicionarItem").click(function () {
+                
+                var $modeloLinha = $(".table-itens tbody tr:first").clone();
+
+                
+                $modeloLinha.find("input").each(function () {
+                    var name = $(this).attr("name");
+                    name = name.replace("[1]", "[" + proximoIndice + "]");
+                    $(this).attr("name", name);
+                    $(this).val(""); 
+                });
+
+                
+                var $btnExcluirItem = $("<button type='button' class='btnExcluirItem' data-row='" + proximoIndice + "'>Excluir</button>");
+                $btnExcluirItem.click(function () {
+                    
+                    var rowIndex = $(this).data("row");
+                    $(this).closest("tr").remove();
+                    proximoIndice--; 
+                });
+
+                
+                $modeloLinha.find("td:last").append($btnExcluirItem);
+
+                
+                $(".table-itens tbody").append($modeloLinha);
+
+                proximoIndice++; 
+            });
+
+            
+            $(".table-itens").on("click", ".btnExcluirItem", function () {
+                
+                var rowIndex = $(this).data("row");
+                $(this).closest("tr").remove();
+                proximoIndice--; 
+            });
+        });
+
+    </script>
 }

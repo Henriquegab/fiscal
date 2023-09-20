@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Fiscalio.Models; // Substitua pelo namespace correto do seu modelo
-using Fiscalio.Persistence; // Substitua pelo namespace correto do seu contexto de banco de dados
+using Fiscalio.Models; 
+using Fiscalio.Persistence; 
 using System.Linq;
 
 namespace Fiscalio.Controllers
@@ -28,26 +28,33 @@ namespace Fiscalio.Controllers
             return View(notaFiscalComValorTotal);
         }
 
-        // GET: NotaFiscal/Editar/5
-        public IActionResult Editar(int? id)
+        
+        public IActionResult Create()
         {
-            if (id == null)
+            
+
+            return View();
+        }
+        [HttpPost] 
+        public IActionResult Store(NotaFiscal notaFiscal)
+        {
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                
+
+                
+                _context.NotaFiscais.Add(notaFiscal);
+                _context.SaveChanges();
+
+                
+                return RedirectToAction("Index");
             }
 
-            var notaFiscal = _context.NotaFiscais.SingleOrDefault(nf => nf.IdNota == id);
-
-            if (notaFiscal == null)
-            {
-                return NotFound();
-            }
-
-            // Aqui você pode passar a nota fiscal para a view de edição
-            return View(notaFiscal);
+            
+            return View("Create", notaFiscal);
         }
 
-        // POST: NotaFiscal/Editar/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Editar(int id, NotaFiscal notaFiscal)
@@ -61,7 +68,7 @@ namespace Fiscalio.Controllers
             {
                 try
                 {
-                    // Aqui você pode atualizar a nota fiscal no banco de dados
+                    
                     _context.Update(notaFiscal);
                     _context.SaveChanges();
                 }
@@ -98,7 +105,7 @@ namespace Fiscalio.Controllers
             _context.NotaFiscais.Remove(notaFiscal);
             _context.SaveChanges();
 
-            // Após a deleção, redirecione para a lista de notas fiscais
+            
             return RedirectToAction(nameof(Index));
         }
 

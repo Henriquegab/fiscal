@@ -4,7 +4,7 @@ using Pomelo.EntityFrameworkCore.MySql;
 using Fiscalio.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 
@@ -15,8 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, serverVersion);
 });
 
-// Registrar o Singleton manualmente
-var dbContext = AppDbContext.GetInstance(); // Obtém a instância Singleton
+
+var dbContext = AppDbContext.GetInstance(); 
 
 
 
@@ -24,7 +24,7 @@ var app = builder.Build();
 
 
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

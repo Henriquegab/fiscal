@@ -1,8 +1,9 @@
-﻿@model List<Fiscalio.Models.NotaFiscalViewModel> // Use dynamic para representar o resultado anônimo
+﻿@model List<Fiscalio.Models.NotaFiscalViewModel> 
 
 <h1>Lista de Notas Fiscais</h1>
 
-<button action="@Url.Action("Cadastrar", "NotaFiscal")">Nova Nota Fiscal</button>
+<a href="@Url.Action("Create", "NotaFiscal")" class="btn btn-primary">Nova Nota Fiscal</a>
+
 <br />
 <table class="table" style="border: 2px solid #000; border-collapse: collapse;">
     <thead>
@@ -10,7 +11,7 @@
             <th>ID</th>
             <th>Emissor</th>
             <th>Data</th>
-            <th>Valor Total</th> <!-- Adicione outras colunas conforme necessário -->
+            <th>Valor Total</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +25,7 @@
                 <td><a href="@Url.Action("Editar", "NotaFiscal", new { id = NotaFiscal.NotaFiscal.IdNota })">Editar</a></td>
                 <td><a href="@Url.Action("Deletar", "NotaFiscal", new { id = NotaFiscal.NotaFiscal.IdNota })">Excluir</a></td>
 
-                <!-- Adicione outras colunas conforme necessário -->
+                
             </tr>
         }
     </tbody>

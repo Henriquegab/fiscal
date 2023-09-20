@@ -8,7 +8,7 @@ namespace Fiscalio.Persistence
         private static AppDbContext _instance;
         private static readonly object _lock = new object();
 
-        // Construtor privado para impedir a criação de instâncias externas
+        
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -16,7 +16,7 @@ namespace Fiscalio.Persistence
         public DbSet<NotaFiscal> NotaFiscais { get; set; }
         public DbSet<Item> Itens { get; set; }
 
-        // Método para obter a instância Singleton do contexto
+        
         public static AppDbContext GetInstance()
         {
             if (_instance == null)
@@ -62,7 +62,7 @@ namespace Fiscalio.Persistence
             {
                 e.HasKey(de => de.IdItem);
 
-                // e.HasOne<NotaFiscal>().WithMany().HasForeignKey(de => de.IdNota);
+                
 
 
             });
@@ -73,15 +73,6 @@ namespace Fiscalio.Persistence
 
             
 
-        /*
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-            var connectionString = "server=localhost;user=root;password=;database=fiscal";
-
-            var serverVersion = new MySqlServerVersion(new Version(10, 4, 27));
-            optionsBuilder.UseMySql(connectionString, serverVersion);
-        }
-        */
+        
     }
 }
